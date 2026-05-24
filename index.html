@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>100%爱你老己 自爱指数测试</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Varela+Round&family=Nunito+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ===== CLAYMORPHISM DESIGN SYSTEM powered by UI/UX Pro Max ===== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  /* Morandi Clay Palette */
+  --c-bg: #faf8f5;
+  --c-cream: #f5f2ed;
+  --c-cream2: #edeae3;
+  --c-text: #4a4040;
+  --c-text2: #7a6e6e;
+  --c-text3: #b0a4a4;
+  --c-yellow: #e8d88a;
+  --c-yellow-light: #f5f0d0;
+  --c-green: #b8d8a8;
+  --c-green-light: #ddf0d0;
+  --c-blue: #a8c8d8;
+  --c-blue-light: #d0e8f5;
+  --c-pink: #e8b8c8;
+  --c-pink-light: #f5d0e0;
+  /* Claymorphism Tokens */
+  --r-sm: 14px;
+  --r-md: 22px;
+  --r-lg: 28px;
+  --r-xl: 36px;
+  --border-w: 2.5px;
+  --shadow-inner: inset -3px -3px 8px rgba(0,0,0,0.04);
+  --shadow-outer: 4px 4px 12px rgba(0,0,0,0.06);
+  --shadow-hover: 6px 6px 18px rgba(0,0,0,0.1);
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
+}
+html, body { height: 100%; font-family: "Nunito Sans", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", Helvetica, sans-serif; background: var(--c-bg); color: var(--c-text); overflow: hidden; -webkit-tap-highlight-color: transparent; }
+/* ===== Floating Background Blobs ===== */
+.bg-blobs { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+.bg-blob { position: absolute; border-radius: 50%; opacity: 0.12; filter: blur(60px); animation: blobDrift 20s ease-in-out infinite; }
+.bg-blob.y { background: var(--c-yellow); width: 200px; height: 200px; top: -60px; left: -40px; animation-delay: 0s; }
+.bg-blob.g { background: var(--c-green); width: 240px; height: 240px; top: 40%; right: -80px; animation-delay: -5s; }
+.bg-blob.b { background: var(--c-blue); width: 180px; height: 180px; bottom: -40px; left: 20%; animation-delay: -10s; }
+.bg-blob.p { background: var(--c-pink); width: 220px; height: 220px; top: 20%; left: 60%; animation-delay: -15s; }
+@keyframes blobDrift { 0%, 100% { transform: translate(0,0) scale(1); } 25% { transform: translate(30px,-20px) scale(1.08); } 50% { transform: translate(-15px,25px) scale(0.94); } 75% { transform: translate(-25px,-10px) scale(1.05); } }
+/* ===== Screens ===== */
+.screen { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.5s var(--ease-soft), transform 0.5s var(--ease-soft); overflow-y: auto; padding: 24px 20px; z-index: 1; }
+.screen.hidden { opacity: 0; pointer-events: none; transform: translateY(24px); }
+.screen.active { opacity: 1; pointer-events: auto; transform: translateY(0); }
+/* ===== Home Screen ===== */
+.home-inner { text-align: center; max-width: 380px; }
+.home-emoji { font-size: 72px; margin-bottom: 20px; animation: float 3s ease-in-out infinite; filter: drop-shadow(0 8px 16px rgba(0,0,0,0.08)); }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+.home-title { font-family: "Varela Round", "Nunito Sans", "PingFang SC", sans-serif; font-size: 36px; font-weight: 700; color: var(--c-text); line-height: 1.15; margin-bottom: 10px; letter-spacing: -0.5px; }
+.home-sub { font-size: 16px; color: var(--c-text2); line-height: 1.7; margin-bottom: 36px; font-weight: 400; }
+.home-btn { font-family: "Varela Round", "Nunito Sans", "PingFang SC", sans-serif; background: linear-gradient(135deg, var(--c-pink), var(--c-pink-light)); color: var(--c-text); border: var(--border-w) solid var(--c-pink); border-radius: var(--r-xl); padding: 18px 56px; font-size: 18px; font-weight: 700; cursor: pointer; transition: transform 0.2s var(--ease-bounce), box-shadow 0.2s var(--ease-soft); box-shadow: var(--shadow-inner), var(--shadow-outer); letter-spacing: 0.5px; -webkit-tap-highlight-color: transparent; user-select: none; }
+.home-btn:active { transform: scale(0.94); box-shadow: inset -2px -2px 6px rgba(0,0,0,0.06); }
+.home-tag { margin-top: 24px; font-size: 12px; color: var(--c-text3); letter-spacing: 1.5px; font-weight: 500; }
+/* ===== Quiz Screen ===== */
+.quiz-header { position: fixed; top: 0; left: 0; right: 0; z-index: 10; background: rgba(250,248,245,0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); padding: 16px 20px 8px; display: flex; align-items: center; gap: 12px; }
+.quiz-progress { flex: 1; height: 8px; border-radius: 4px; background: var(--c-cream2); overflow: hidden; box-shadow: inset 0 1px 3px rgba(0,0,0,0.06); }
+.quiz-progress-bar { height: 100%; border-radius: 4px; transition: width 0.5s var(--ease-soft); }
+.quiz-counter { font-size: 14px; color: var(--c-text3); min-width: 52px; text-align: right; font-weight: 600; font-variant-numeric: tabular-nums; }
+.quiz-body { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 70px 20px 20px; max-width: 420px; width: 100%; margin: 0 auto; }
+.quiz-num { font-size: 13px; color: var(--c-text3); margin-bottom: 8px; letter-spacing: 2px; font-weight: 600; text-transform: uppercase; }
+.quiz-scenario { font-size: 17px; line-height: 1.75; color: var(--c-text); margin-bottom: 32px; font-weight: 500; }
+.quiz-options { display: flex; flex-direction: column; gap: 12px; }
+.quiz-opt { background: #fff; border: var(--border-w) solid var(--c-cream2); border-radius: var(--r-md); padding: 16px 18px; font-size: 15px; color: var(--c-text); cursor: pointer; transition: all 0.2s var(--ease-soft); text-align: left; line-height: 1.65; font-weight: 500; box-shadow: var(--shadow-inner), var(--shadow-outer); position: relative; overflow: hidden; }
+.quiz-opt:active { transform: scale(0.97); }
+/* Option Color Themes — 4 Morandi colors */
+.quiz-opt.c-y { --opt-color: var(--c-yellow); --opt-light: var(--c-yellow-light); }
+.quiz-opt.c-g { --opt-color: var(--c-green); --opt-light: var(--c-green-light); }
+.quiz-opt.c-b { --opt-color: var(--c-blue); --opt-light: var(--c-blue-light); }
+.quiz-opt.c-p { --opt-color: var(--c-pink); --opt-light: var(--c-pink-light); }
+.quiz-opt:hover { border-color: var(--opt-color, var(--c-yellow)); transform: translateY(-2px); box-shadow: var(--shadow-hover); background: var(--opt-light, var(--c-yellow-light)); }
+.quiz-opt.selected { border-color: var(--opt-color, var(--c-pink)); background: var(--opt-light, var(--c-pink-light)); font-weight: 700; box-shadow: inset -3px -3px 8px rgba(0,0,0,0.06), 3px 3px 10px rgba(0,0,0,0.1); transform: scale(1.02); }
+/* Quiz Navigation */
+.quiz-nav { display: flex; gap: 10px; margin-top: 24px; justify-content: center; }
+.quiz-nav-btn { font-family: "Varela Round","Nunito Sans","PingFang SC",sans-serif; border: var(--border-w) solid var(--c-cream2); border-radius: var(--r-sm); padding: 12px 24px; font-size: 14px; cursor: pointer; font-weight: 600; transition: transform 0.2s var(--ease-bounce), box-shadow 0.2s var(--ease-soft); background: #fff; color: var(--c-text2); box-shadow: var(--shadow-inner), var(--shadow-outer); }
+.quiz-nav-btn:hover { border-color: var(--c-yellow); color: var(--c-text); }
+.quiz-nav-btn:active { transform: scale(0.94); }
+.quiz-nav-btn:disabled { opacity: 0.35; pointer-events: none; }
+.quiz-nav-btn.primary { background: linear-gradient(135deg, var(--c-yellow-light), var(--c-green-light)); border-color: var(--c-yellow); color: var(--c-text); font-weight: 700; }
+.quiz-nav-btn.primary:hover { border-color: var(--c-green); }
+.quiz-nav-hint { font-size: 12px; color: var(--c-text3); text-align: center; margin-top: 8px; }
+/* ===== Result Screen ===== */
+.result-screen { background: linear-gradient(180deg, #faf8f5 0%, #f5f0d0 12%, #faf8f5 24%, #ddf0d0 36%, #faf8f5 48%, #d0e8f5 60%, #faf8f5 72%, #f5d0e0 84%, #faf8f5 100%); }
+.result-inner { max-width: 400px; width: 100%; text-align: center; padding: 48px 0 72px; }
+.result-emoji { font-size: 80px; margin-bottom: 16px; animation: float 3s ease-in-out infinite; filter: drop-shadow(0 8px 20px rgba(0,0,0,0.08)); }
+.result-pct { font-family: "Varela Round", "Nunito Sans", "PingFang SC", sans-serif; font-size: 64px; font-weight: 800; color: var(--c-text); line-height: 1; margin-bottom: 4px; letter-spacing: -1px; }
+.result-pct-label { font-size: 14px; color: var(--c-text3); letter-spacing: 3px; margin-bottom: 24px; font-weight: 600; text-transform: uppercase; }
+.result-name { font-family: "Varela Round", "Nunito Sans", "PingFang SC", sans-serif; font-size: 26px; font-weight: 700; color: var(--c-text); position: relative; display: inline-block; padding: 0 4px; }
+.result-name::after { content: ""; position: absolute; bottom: -6px; left: 10%; width: 80%; height: 4px; border-radius: 2px; background: linear-gradient(90deg, var(--c-yellow), var(--c-green), var(--c-blue), var(--c-pink)); }
+.result-poem { font-size: 16px; color: var(--c-text2); line-height: 1.85; margin: 28px 0; font-style: italic; font-weight: 400; }
+.result-divider { width: 60px; height: 2px; background: var(--c-text3); opacity: 0.2; margin: 0 auto 28px; border-radius: 1px; }
+.result-psy { background: #fff; border-radius: var(--r-md); padding: 20px; margin-bottom: 24px; text-align: left; border-left: 4px solid var(--c-blue); box-shadow: var(--shadow-inner), var(--shadow-outer); border: var(--border-w) solid var(--c-blue-light); }
+.result-psy-title { font-family: "Varela Round", "Nunito Sans", "PingFang SC", sans-serif; font-size: 13px; color: var(--c-blue); letter-spacing: 1px; margin-bottom: 10px; font-weight: 700; }
+.result-psy-text { font-size: 14px; color: var(--c-text2); line-height: 1.75; font-weight: 400; }
+.result-note-wrap { margin-bottom: 28px; }
+.result-note { display: inline-block; background: #fff; border-radius: var(--r-sm); padding: 16px 22px; font-size: 14px; color: var(--c-text); line-height: 1.65; position: relative; box-shadow: inset -2px -2px 6px rgba(232,216,138,0.15), 3px 3px 0px var(--c-yellow), 3px 3px 10px rgba(0,0,0,0.06); border: var(--border-w) solid var(--c-yellow); max-width: 290px; text-align: left; transform: rotate(-0.5deg); }
+.result-note::before { content: ""; position: absolute; top: -10px; left: 28px; width: 16px; height: 16px; background: #fff; border-left: var(--border-w) solid var(--c-yellow); border-top: var(--border-w) solid var(--c-yellow); transform: rotate(45deg); }
+.result-actions { display: flex; gap: 12px; margin-top: 32px; justify-content: center; flex-wrap: wrap; }
+.result-btn { font-family: "Varela Round", "Nunito Sans", "PingFang SC", sans-serif; border: var(--border-w) solid; border-radius: var(--r-lg); padding: 14px 28px; font-size: 15px; cursor: pointer; font-weight: 700; transition: transform 0.2s var(--ease-bounce), box-shadow 0.2s var(--ease-soft); box-shadow: var(--shadow-inner), var(--shadow-outer); user-select: none; }
+.result-btn:active { transform: scale(0.93); }
+.result-btn.retry { background: linear-gradient(135deg, var(--c-pink-light), var(--c-yellow-light)); border-color: var(--c-pink); color: var(--c-text); }
+.result-btn.poster { background: linear-gradient(135deg, var(--c-green-light), var(--c-blue-light)); border-color: var(--c-green); color: var(--c-text); }
+/* ===== Progress Bar Themes ===== */
+.quiz-progress-bar.theme-y { background: linear-gradient(90deg, var(--c-yellow-light), var(--c-yellow)); }
+.quiz-progress-bar.theme-g { background: linear-gradient(90deg, var(--c-green-light), var(--c-green)); }
+.quiz-progress-bar.theme-b { background: linear-gradient(90deg, var(--c-blue-light), var(--c-blue)); }
+.quiz-progress-bar.theme-p { background: linear-gradient(90deg, var(--c-pink-light), var(--c-pink)); }
+/* ===== Poster Modal ===== */
+.poster-overlay { position: fixed; inset: 0; z-index: 100; background: rgba(74,64,64,0.55); display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.35s var(--ease-soft); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
+.poster-overlay.show { opacity: 1; pointer-events: auto; }
+.poster-modal { background: #fff; border-radius: var(--r-lg); padding: 28px; max-width: 420px; width: 92%; max-height: 90vh; overflow-y: auto; text-align: center; box-shadow: 0 16px 48px rgba(0,0,0,0.18); border: var(--border-w) solid var(--c-cream2); }
+.poster-modal-title { font-family: "Varela Round", "Nunito Sans", "PingFang SC", sans-serif; font-size: 20px; font-weight: 700; color: var(--c-text); margin-bottom: 16px; }
+.poster-modal canvas, .poster-modal img { width: 100%; border-radius: var(--r-md); margin-bottom: 16px; box-shadow: var(--shadow-outer); }
+.poster-modal-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+.poster-btn { font-family: "Varela Round", "Nunito Sans", "PingFang SC", sans-serif; border: var(--border-w) solid; border-radius: var(--r-sm); padding: 12px 24px; font-size: 14px; cursor: pointer; font-weight: 600; transition: transform 0.2s var(--ease-bounce); user-select: none; }
+.poster-btn:active { transform: scale(0.93); }
+.poster-btn-save { background: var(--c-green-light); border-color: var(--c-green); color: var(--c-text); }
+.poster-btn-share { background: var(--c-blue-light); border-color: var(--c-blue); color: var(--c-text); }
+.poster-btn-close { background: var(--c-cream); border-color: var(--c-cream2); color: var(--c-text2); }
+.poster-saving { font-size: 13px; color: var(--c-text3); margin-top: 10px; font-weight: 500; }
+</style>
+</head>
+<body>
+
+<!-- Claymorphism background blobs -->
+<div class="bg-blobs">
+  <div class="bg-blob y"></div>
+  <div class="bg-blob g"></div>
+  <div class="bg-blob b"></div>
+  <div class="bg-blob p"></div>
+</div>
+
+<div class="screen active" id="screen-home">
+  <div class="home-inner">
+    <div class="home-emoji">🌸</div>
+    <div class="home-title">100%爱你老己</div>
+    <div class="home-sub">5·25 = 我爱我<br>测测你的自爱指数</div>
+    <button class="home-btn" onclick="startQuiz()">开始测试 ✿</button>
+    <div class="home-tag">10道情景题 · 20种自爱人格</div>
+  </div>
+</div>
+
+<div class="screen hidden" id="screen-quiz">
+  <div class="quiz-header">
+    <div class="quiz-progress"><div class="quiz-progress-bar" id="progress-bar"></div></div>
+    <div class="quiz-counter" id="quiz-counter">1 / 10</div>
+  </div>
+  <div class="quiz-body" id="quiz-body"></div>
+</div>
+
+<div class="screen hidden" id="screen-result">
+  <div style="width:100%;min-height:100vh;display:flex;align-items:center;justify-content:center;">
+    <div class="result-inner" id="result-inner"></div>
+  </div>
+</div>
+
+<!-- Poster Modal -->
+<div class="poster-overlay" id="poster-overlay">
+  <div class="poster-modal">
+    <div class="poster-modal-title">✨ 你的自爱海报</div>
+    <img id="poster-img" alt="结果海报" style="display:none">
+    <canvas id="poster-canvas" width="750" height="1100" style="display:block"></canvas>
+    <div class="poster-modal-actions">
+      <button class="poster-btn poster-btn-save" onclick="savePoster()">保存图片 💾</button>
+      <button class="poster-btn poster-btn-share" onclick="sharePosterImg()">分享给朋友 📤</button>
+      <button class="poster-btn poster-btn-close" onclick="closePoster()">关闭</button>
+    </div>
+    <div class="poster-saving" id="poster-msg"></div>
+  </div>
+</div>
+
+<script>
+// ===== QUESTIONS: 中学生自爱场景 =====
+var QUESTIONS=[
+{s:"考试成绩出来了，比预想的差很多，你第一反应是？",o:["我真没用，什么都做不好","完了，回家怎么交代","有点失落，但先看看错在哪","分数不代表我的价值，下次加油"],v:[0,3,7,10]},
+{s:"同桌这次又比你考得好，你心里？",o:["好烦，为什么我总是追不上","假装无所谓，其实很难受","替ta开心，也相信自己的节奏","我们不比较，各走各的路"],v:[0,3,7,10]},
+{s:"老师在全班面前点名说你退步了，你？",o:["恨不得钻到地底下","脸上发烧，心里全是羞耻","有点尴尬，但会默默努力","老师的评价不等于我的全部"],v:[0,3,7,10]},
+{s:"熬夜写作业写到很晚，第二天还要早起，你？",o:["觉得自己好惨，活着好累","咬牙坚持，反正习惯了","决定今晚一定要早点睡","告诉自己身体比作业重要"],v:[0,3,7,10]},
+{s:"一道题想了很久还是不会做，你？",o:["好笨，这么简单都不会","烦躁地把笔扔了","先跳过去，心情好了再想","问同学问老师，不丢人"],v:[0,3,7,10]},
+{s:"快中考/期末了，你的心态是？",o:["焦虑到睡不着，觉得要完了","疯狂刷题，但越刷越慌","制定计划，一步步来","尽力就好，我相信自己"],v:[0,3,7,10]},
+{s:"照镜子的时候，你最常想的是？",o:["这里不好看那里也不好看","为什么别人都比我好看","还行，今天气色不错","这个人也挺可爱的"],v:[0,3,7,10]},
+{s:"同学说你胖了/瘦了/长痘了，你？",o:["心里一沉，一天不开心","表面笑笑，回家偷偷照镜子","有点在意，但很快就忘了","我什么样我说了算"],v:[0,3,7,10]},
+{s:"刷到朋友圈里同学精修的自拍，你？",o:["我怎么p都p不出这种效果","默默关掉，不想看了","点个赞，知道那是精修的","我不需要跟任何人比外貌"],v:[0,3,7,10]},
+{s:"夏天穿短裤/短袖出门，你犹豫吗？",o:["不敢穿，太暴露缺点了","穿是可以穿，但一直不自在","有点犹豫但最后穿出去了","想穿就穿，舒服最重要"],v:[0,3,7,10]},
+{s:"有人偷偷议论你的外表，被你听到了，你？",o:["心碎，想把自己藏起来","假装没听见，但记了很久","有点难过，但告诉自己不重要","我的价值不由别人的嘴决定"],v:[0,3,7,10]},
+{s:"班上流行某种穿搭风格但你穿起来不合适，你？",o:["硬凑，不合群比不合适更可怕","不穿但心里有点酸","找适合自己的风格","我的风格我自己定"],v:[0,3,7,10]},
+{s:"你觉得自己长得好看吗？",o:["完全不好看","大多数时候不满意","有时候觉得还行","我觉得自己挺好看的"],v:[0,3,7,10]},
+{s:"课间大家都三五成群，你一个人待着，你？",o:["好尴尬，假装在忙","难过，觉得自己不受欢迎","享受独处，翻翻书听听歌","一个人待着也很自在"],v:[0,3,7,10]},
+{s:"你想加入一群同学聊天，但他们聊得正嗨，你？",o:["算了，我不属于那里","在旁边站着，等他们注意到我","等一个合适的时机插话","走过去自然地加入，不纠结"],v:[0,3,7,10]},
+{s:"好朋友突然跟别人玩得更好了，你？",o:["被抛弃了，好难过","心里不舒服但不敢说","有点失落，但会主动约ta","朋友不是独占的，我也交新朋友"],v:[0,3,7,10]},
+{s:"有人说你太安静了不合群，你？",o:["开始强迫自己多说话","难过，觉得自己有问题","我就是比较安静怎么了","安静是我的性格，不是缺陷"],v:[0,3,7,10]},
+{s:"你在班里被开了一个让你不舒服的玩笑，你？",o:["跟着笑，假装没事","心里委屈但不吭声","当时没说但事后很难受","直接说这个玩笑我不喜欢"],v:[0,3,7,10]},
+{s:"有人找你借作业抄，你不想给但又怕得罪人，你？",o:["给了，但心里很不舒服","找借口拖一拖","温和地说还是自己做比较好","坚定拒绝：我不能帮你作弊"],v:[0,3,7,10]},
+{s:"妈妈拿你跟别人家的孩子比较，说你不如人家，你？",o:["我确实不如人家，好难过","心里委屈但不敢反驳","解释每个人不一样","我知道自己的好，不用比"],v:[0,3,7,10]},
+{s:"爸妈因为你的学习吵架，你？",o:["都是我的错，我太差了","躲进房间捂住耳朵","有点内疚但知道不是我的责任","他们的问题他们自己解决"],v:[0,3,7,10]},
+{s:"你想选一个父母不喜欢的兴趣爱好，你？",o:["算了听他们的","偷偷做不说","跟他们好好沟通试试","这是我的人生，我会坚持"],v:[0,3,7,10]},
+{s:"你考了全班前十，但爸妈说怎么没进前五，你？",o:["瞬间觉得自己的努力没意义","沮丧，但不想争辩","有点失望，但告诉自己前十已经很棒","我已经很棒了，不需要他们认可"],v:[0,3,7,10]},
+{s:"你心情不好，爸妈问你怎么了，你？",o:["说没事，把情绪藏起来","敷衍两句不想多说","试着说一点但说不清楚","告诉他们我现在需要一点空间"],v:[0,3,7,10]},
+{s:"你觉得自己以后想做什么，有方向吗？",o:["完全不知道，好迷茫","大概有点想法但不确定","有几个方向在探索","不急着定，我会找到的"],v:[0,3,7,10]},
+{s:"想到长大要面对那么多事，你？",o:["好害怕，不想长大","有点焦虑但只能往前走","期待又紧张","相信未来的自己会处理好"],v:[0,3,7,10]},
+{s:"你觉得学习是为了什么？",o:["为了考个好高中好大学","为了让爸妈满意","为了以后有更多选择","为了成为更好的自己"],v:[0,3,7,10]},
+{s:"如果让你用一句话评价自己，你会说？",o:["我不太行","普普通通吧","有优点也有缺点","我挺好的，正在变好"],v:[0,3,7,10]},
+{s:"你觉得自己身上最大的优点是什么？",o:["好像没什么特别的优点","有几个但不好意思说","能说出两三个","我知道自己的闪光点"],v:[0,3,7,10]},
+{s:"当你被误解的时候，你通常？",o:["懒得解释，反正没人懂","特别着急想证明自己","试着解释一遍","解释完就不纠结了，懂的人自然懂"],v:[0,3,7,10]},
+{s:"你对自己不满意的地方，你的态度是？",o:["讨厌死了，想全部改掉","无奈，只能接受","有些能改有些就当特色了","不完美才真实，我都接受"],v:[0,3,7,10]},
+{s:"你觉得自己跟别人不太一样，这让你？",o:["很焦虑，想跟大家一样","有点不自在但没办法","觉得有点特别也挺好","不一样才酷，我喜欢"],v:[0,3,7,10]},
+{s:"周末刷了一下午手机，晚上你？",o:["好后悔，又浪费了一天","算了反正也没别的事","稍微有点愧疚但不纠结","偶尔放松很正常，明天加油"],v:[0,3,7,10]},
+{s:"看到同学在群里聊得热火朝天你没参与，你？",o:["好怕被孤立，赶紧凑上去","默默看完聊天记录","不参与也没关系","我有自己的节奏"],v:[0,3,7,10]},
+{s:"有人给你发了一条让你不舒服的消息，你？",o:["忍着不回或者敷衍","回复了但心里膈应","直接说我不喜欢这样","拉黑或屏蔽，我不需要这种消耗"],v:[0,3,7,10]},
+{s:"你为了一场考试准备了很久但还是考砸了，你？",o:["我果然不行，放弃吧","大哭一场","难过之后分析原因","为努力的自己鼓掌，结果不重要"],v:[0,3,7,10]},
+{s:"上课被点名回答问题，你答错了，你？",o:["丢脸死了，之后不敢举手了","脸红心跳一节课","尴尬几秒就过去了","答错很正常，敢举手就很棒"],v:[0,3,7,10]},
+{s:"你被选去参加一个比赛但是很紧张，你？",o:["想退出，怕丢人","硬着头皮上，全程发抖","紧张但会好好准备","紧张说明我在乎，我可以驾驭它"],v:[0,3,7,10]},
+{s:"悄悄喜欢一个人但不敢说，你的心情是？",o:["自卑，觉得自己不配被喜欢","每天反复内耗","偷偷关注ta，保持距离挺好的","喜欢一个人本身就是快乐的事"],v:[0,3,7,10]},
+{s:"你收到了一封匿名表白信，你？",o:["觉得是不是恶作剧","开心但不敢相信","有点开心有点慌","有人喜欢我说明我有魅力"],v:[0,3,7,10]},
+{s:"被喜欢的人拒绝了，你？",o:["我果然不值得被爱","难过很久走不出来","伤心但知道这很正常","被拒绝不代表我不好"],v:[0,3,7,10]},
+{s:"你觉得自己值得被喜欢吗？",o:["不值得，没人会喜欢我","也许有人会但不长久","应该值得吧","当然值得，我挺好的"],v:[0,3,7,10]},
+{s:"被老师当着全班表扬了，你？",o:["不好意思，觉得不配","心里开心但表面淡定","开心地笑出来","我值得这个表扬"],v:[0,3,7,10]},
+{s:"你帮了同学一个大忙但对方一句谢谢都没有，你？",o:["好气，下次不帮了","有点失落但算了","直接说嘿我帮了你哦","我帮人是因为我想帮，不求回报"],v:[0,3,7,10]},
+{s:"你参加集体活动时总是落单，你？",o:["好痛苦，想逃跑","假装很忙假装有人","主动去找一个看起来友善的人","落单也没关系，我享受自由"],v:[0,3,7,10]},
+{s:"被同学取了一个你不喜欢的外号，你？",o:["默默接受，不想惹事","心里不舒服但不反抗","告诉他们我不喜欢这个外号","坚定拒绝，我的名字不搞笑"],v:[0,3,7,10]},
+{s:"有人在你背后说了坏话传到你这了，你？",o:["好难过，想找ta对质","开始怀疑自己是不是真的不好","有点生气但选择放下","他们的看法影响不了我"],v:[0,3,7,10]},
+{s:"你发现自己的好朋友在背后说你的秘密，你？",o:["崩溃，再也不相信任何人","很受伤但不知道怎么面对","找ta当面说清楚","朋友可以换，我的信任很珍贵"],v:[0,3,7,10]},
+{s:"你对自己偶尔出现的阴暗想法（嫉妒、抱怨）怎么看？",o:["我好坏，怎么会有这种想法","赶紧压抑它","这很正常，我有情绪不是错","接纳所有情绪，它们都是我的一部分"],v:[0,3,7,10]},
+{s:"一个人吃饭的时候，你感觉？",o:["好孤独，别人都在看我","尴尬，快点吃完走","还行，刷刷手机","一个人吃饭也很享受"],v:[0,3,7,10]},
+{s:"你觉得自己最需要被理解的是什么？",o:["我的压力没人懂","我其实很努力了","我希望被看到真正的我","我已经在学着理解自己了"],v:[0,3,7,10]},
+{s:"如果让你对初一的自己说一句话，你会说？",o:["多学点，别偷懒","别那么在意别人的眼光","你会慢慢变好的","你已经做得很好了，真的"],v:[0,3,7,10]},
+{s:"你最想在谁的怀里大哭一场？",o:["好像没有可以让我哭的人","不想哭，哭了也没用","妈妈/闺蜜/兄弟","抱着自己也能哭出来"],v:[0,3,7,10]},
+{s:"你写日记或者用其他方式记录心情吗？",o:["从来不，没这个习惯","偶尔，但不怎么写心里话","经常写，写出来好多了","写日记是我和自己对话的方式"],v:[0,3,7,10]},
+{s:"你觉得被大家喜欢重要吗？",o:["非常重要，不被喜欢很可怕","挺重要的但做不到","有人喜欢就够了","我喜欢自己就够了"],v:[0,3,7,10]},
+{s:"你觉得自己在班里属于？",o:["透明人","偶尔被注意到","有几个要好的朋友","我存在感挺强的"],v:[0,3,7,10]},
+{s:"体育课要跑800/1000米，还没跑你就？",o:["腿软，想请假","硬着头皮上","告诉自己跑完就很棒","来吧，我能行"],v:[0,3,7,10]},
+{s:"你的书包/书桌通常是什么样的？",o:["乱七八糟","偶尔整理","整齐但也有生活痕迹","井然有序，看着舒服"],v:[0,3,7,10]},
+{s:"周末你最喜欢的放松方式是？",o:["睡觉，什么都不想干","刷手机刷到麻木","和朋友出去玩","做一件一直想做的小事"],v:[0,3,7,10]},
+{s:"你最想拥有的超能力是什么？",o:["隐身，不想被看到","读心术，知道别人怎么看我","瞬间学会所有知识","治愈术，治好自己和别人的不开心"],v:[0,3,7,10]},
+{s:"你觉得开心的感觉多久来一次？",o:["好久没开心过了","偶尔开心一下","时不时有开心的事","每天都能找到开心的小事"],v:[0,3,7,10]},
+{s:"你最后一次因为开心的事笑出声是什么时候？",o:["不记得了","上周吧","昨天好像有过","今天就有"],v:[0,3,7,10]},
+{s:"你对自己的中学生活满意吗？",o:["不满意，挺难的","还行，有好有坏","大部分时候满意","我尽力了，所以满意"],v:[0,3,7,10]},
+{s:"如果可以给压力按暂停键一小时，你会做什么？",o:["睡觉，补觉","不知道，没想过","做一件和学习完全无关的事","好好吃一顿然后慢慢走一走"],v:[0,3,7,10]},
+{s:"你觉得爱自己最关键的一步是？",o:["我还不清楚","停止不停地否定自己","学会听听自己想要什么","每天对自己好一点"],v:[0,3,7,10]},
+{s:"有人告诉你自爱不是自私，你怎么想？",o:["但我觉得对自己好就是自私","有点道理但不太信","愿意试试看","对，我值得被自己好好对待"],v:[0,3,7,10]}
+];
+// ===== NOTES =====
+var NOTES=["给自己泡一杯热茶，对着窗外发呆五分钟","买一束花，不用特别的理由，就因为今天周一也想美","对着镜子说你辛苦了，看自己的眼睛说","写下三件今天感激的事，哪怕今天天气很好也算","关掉所有通知，给自己完整的一小时","走到公园，找一棵喜欢的树靠一会儿","给自己做一顿用心摆盘的好饭","洗一个超长的热水澡，慢慢来，不赶时间","今晚早睡一小时，手机放另一个房间","写一张笑脸便利贴，贴在水杯上","翻出小时候照片，对那个小孩笑笑","给自己寄一张明信片，写上想说的话","今天允许自己说不，不解释","什么也不做，安静发呆十分钟就很幸福","去书店或图书馆，随便逛逛，不买也行","给自己画个小笑脸，贴在冰箱上","放一首最爱的歌，跟着大声唱","整理一个属于自己的小角落","对镜子里的自己微笑，即使今天过得很糟","给自己买最喜欢口味的冰淇淋","写一条只想给自己看的备忘录","煮一碗面，打个荷包蛋，好好吃","找个地方晒太阳，什么都不干","给下周的自己留一句话","摸摸自己的头，说你已经很棒了","给自己买一套舒服的睡衣","今晚不和任何人说话，和自己待着","看一部一直想看但还没看的电影","做一件小时候最爱做的事，哪怕只是折纸飞机","对自己说没关系，我们都还在路上","走出家门，随便走走，看看路边的树和花","给自己买一个喜欢的小摆件放在桌上","今天不比较，不刷朋友圈","给自己泡一杯热可可，慢慢喝","对着天空深呼吸三次","整理手机相册，删掉让自己难受的照片","写一封给五年后自己的信","给自己放一天假，不回复任何工作消息","对着月亮说谢谢你今天也在","给自己做一张歌单，专门用来治愈心情","今天不批判自己任何一个决定","去花店闻闻花香","给自己买一个柔软的抱枕","写下自己最骄傲的三件事，贴在镜子上","今天允许自己脆弱","在日记本上写我原谅你了，然后合上本子","今晚不熬夜，早点睡","给你最在乎的人发一条温暖的消息","读一首温暖的诗","今天只做让自己开心的事","对自己说你已经做得够好了","给自己买一件喜欢但不贵的小东西","今天只做我想做的事","站在窗前看五分钟街景","给自己煮一碗甜汤","在备忘录里写今天我值得被爱","今天不对自己说任何否定的话","去超市买一种从没吃过的水果","给自己准备一个夸夸罐","今天做一个不比较日","给自己的身体说谢谢你","今天不刷任何短视频","给自己买一盆小多肉","今天允许自己什么都不完成","在笔记本上画一朵小花","今天做一个感恩练习","给自己买一本喜欢的书","今天不和任何人争论","抱一抱自己","今天写一句今天我做到了","给自己准备一个快乐盒子","今天不对自己说你应该","去公园听鸟叫","给自己买一个可爱的水杯","对着窗户哈气画个笑脸","今天允许自己笨拙","给自己准备一个睡前仪式","今天只赞美自己","去面包店买一个香的面包","给自己写我值得被温柔对待","今天不做任何人的情绪垃圾桶","给自己买一双舒服的袜子","今天说三句我允许","在日记里写今天我站在自己这边","给自己买一束干花","今天不回复任何让自己不舒服的消息","给自己做一杯好喝的果茶","今天不看任何身材焦虑的内容","对自己说我相信你","给自己做一顿早餐，坐在窗边吃","今天不跟任何人比较，跟昨天的自己比","今天不羡慕任何人","去河边坐一会儿，听听水声","给自己买一套喜欢的文具","对自己说你已经走了很远的路了"];
+
+var RESULTS=[{p:[0,5],n:"爱己萌芽",e:"🌱",q:"你是一颗刚刚破土的种子，阳光才漏进来一点，但你已经在努力了。",k:"你的自爱分数较低，这并不代表你不可爱，而是你长期以来习惯把别人的感受放在自己前面。心理学家Kristin Neff指出，自我关怀不是自私，而是把我也纳入关怀的范围。"},{p:[6,10],n:"自我觉察者",e:"🔍",q:"你开始注意到自己，那个一直在角落里被忽略的人正在悄悄抬头。",k:"正在建立自我觉察，这是自爱的第一步。心理学上的Self-Awareness分为内在觉察和外在觉察，你现在正在走向内在觉察的路上。"},{p:[11,15],n:"温柔觉醒者",e:"🌅",q:"心里有一束微光在亮，虽然还在犹豫要不要把门打开，但光已经漏出来了。",k:"你正在经历温柔觉醒，意识到自己值得被照顾的瞬间。这是自爱成长的关键转折点，请保护这份微光，别让它熄灭。"},{p:[16,20],n:"微光寻路人",e:"🕯️",q:"你在一片雾里，但手里已经有一盏小灯了，虽然还看不清全貌，但你知道方向。",k:"你正在学习自我接纳，这是Rogers人本主义心理学的核心概念，接纳不完美的自己是改变的起点。"},{p:[21,25],n:"内心园丁",e:"🌿",q:"你开始给自己的内心花园浇水了，虽然杂草还多，但你已经知道花园需要被照顾。",k:"你正在建立自我关怀习惯。Neff的研究表明每天3分钟的自我关怀练习，8周后大脑结构会发生可测量的变化。"},{p:[26,30],n:"自我对话者",e:"💬",q:"你开始和自己说话了，不是批评，是第一次像朋友一样问你还好吗。",k:"健康的自我对话是心理韧性的核心指标。心理学中的自我对话训练已被证实能显著降低焦虑和抑郁风险。"},{p:[31,35],n:"暖阳初照",e:"☀️",q:"阳光终于照进来了，你第一次觉得，也许我也能被好好对待。",k:"你正在经历自我价值感的萌芽。根据马斯洛需求层次，自尊需求是自我实现的基础，你现在正在攀登这座山。"},{p:[36,40],n:"自尊摆渡人",e:"🚣",q:"你在两个岸边之间，一岸是否定自己，一岸是接纳自己，桨在你手里。",k:"你正在跨过自尊鸿沟，从外部评价驱动的自信转向内在价值驱动的自信。这是最艰难但最有价值的跨越。"},{p:[41,45],n:"边界建造师",e:"🧱",q:"你开始懂得，爱人之前要先护己，你正在为自己筑起温柔而坚定的边界。",k:"掌握健康边界是心理成熟的标志。心理学家Henry Cloud指出，没有边界的爱是共生，有边界的爱才是真正的爱。"},{p:[46,50],n:"自洽练习生",e:"🎯",q:"你在矛盾和自我怀疑中找到一点平衡了，像在走钢丝，但你已经不再害怕摔下去。",k:"自洽Self-Consistency是存在主义心理学的核心，接受矛盾、拥抱不确定性，在不完美中获得力量。"},{p:[51,55],n:"心灵守护者",e:"🛡️",q:"你很会保护自己了，像一位温柔的骑士，把伤害挡在门外，把温柔留给自己。",k:"你已具备心理韧性Resilience，在逆境中快速恢复并成长的能力。研究显示高心理韧性人群的皮质醇水平更稳定。"},{p:[56,60],n:"内心探险家",e:"🗺️",q:"你正在勇敢地探索自己的内心世界，像一位探险家，发现宝藏也接受废墟。",k:"你正在实践自我探索，这是荣格分析心理学的核心，与自己的Shadow对话才能真正整合自我。"},{p:[61,65],n:"温柔舵手",e:"🚢",q:"你在情绪的浪花中能稳住方向了，温柔但有力量，你知道岸在哪里。",k:"具备情绪调节能力是心理健康的黄金标准。神经科学表明长期练习正念可增强前额叶对杏仁核的调控能力。"},{p:[66,70],n:"自我策展人",e:"🎨",q:"你把自己的人生策展得很有品味了，每一段经历都是展品，每一道伤疤都是故事。",k:"自我策展是一种高级的心理能力，从人生经历中提取意义而非被经历定义。这是叙事疗法的核心理念。"},{p:[71,75],n:"光之灌溉者",e:"💧",q:"你不仅滋养自己，也开始灌溉身边的人了，你的光不只是给自己，也给世界。",k:"进入利他性自爱阶段。心理学研究表明帮助他人能激活大脑的奖赏回路，但前提是你自己已经充好电。你做到了。"},{p:[76,80],n:"内在家园主",e:"🏡",q:"你心里有了一个安心的小世界，累了就回去，没事就在里面种花。",k:"你已建立稳固的内在安全基地。依恋理论创始人Bowlby指出拥有内在安全基地的人在外探索时更有勇气。"},{p:[81,85],n:"灵魂牧羊人",e:"🐑",q:"你温柔而坚定地引导着自己，像牧羊人引导羊群，从不丢下任何一只。",k:"你展现了自我领导力的最高境界。对自己的每个部分，包括脆弱、恐惧、愤怒都充满慈悲和引导力。"},{p:[86,90],n:"自爱大师",e:"👑",q:"你把爱自己当作日常呼吸了，像大师一样自然，这件事早已成为你的一部分。",k:"恭喜你已达到高度自我关怀水平。Neff的量表显示这一水平的人群心理幸福感显著高于平均水平。"},{p:[91,95],n:"心灵绽放者",e:"🌸",q:"你的内心已经丰盈到自然散发光芒了，你是一朵正在盛放的花，不需要证明什么。",k:"你处于自我实现的高阶状态。马斯洛晚年补充：自我实现者不是完美的人，而是最真实的人。你就是那个最真实的人。"},{p:[96,100],n:"爱己盛放",e:"🌟",q:"你活成了一束光，不用刻意，光芒就是从你生命里长出来的。",k:"你已达到心理学上的心流加自爱整合态。你的自我关怀已成人格特质而非刻意练习。这是极少数人能达到的境界，为你鼓掌！"}];
+
+// ===== LOGIC =====
+var state={q:0,score:0,order:[],answers:[]};
+function startQuiz(){var N=QUESTIONS.length;var ord=[];while(ord.length<10){var r=Math.floor(Math.random()*N);if(ord.indexOf(r)<0)ord.push(r);}state={q:0,score:0,order:ord,answers:new Array(10).fill(-1)};showScreen("screen-quiz");renderQ();}
+function renderQ(){
+  var qi=state.order[state.q];var q=QUESTIONS[qi];
+  var pct=Math.round((state.q)/10*100);
+  var cls=["theme-y","theme-g","theme-b","theme-p"];
+  document.getElementById("progress-bar").style.width=pct+"%";
+  document.getElementById("progress-bar").className="quiz-progress-bar "+cls[state.q%4];
+  document.getElementById("quiz-counter").textContent=(state.q+1)+" / 10";
+  var optCls=["c-y","c-g","c-b","c-p"];
+  var h='<div class="quiz-num">Q'+(state.q+1)+'</div>';
+  h+='<div class="quiz-scenario">'+q.s+'</div>';
+  h+='<div class="quiz-options">';
+  for(var i=0;i<q.o.length;i++){
+    var sel=state.answers[state.q]===i?' selected':'';
+    h+='<div class="quiz-opt '+optCls[i]+sel+'" onclick="selectOpt('+i+')">'+q.o[i]+'</div>';
+  }
+  h+='</div>';
+  h+='<div class="quiz-nav">';
+  h+='<button class="quiz-nav-btn" onclick="prevQ()" '+(state.q===0?'disabled':'')+'>← 上一题</button>';
+  if(state.q<9) h+='<button class="quiz-nav-btn primary" onclick="nextQ()">下一题 →</button>';
+  else h+='<button class="quiz-nav-btn primary" onclick="nextQ()">查看结果 ✨</button>';
+  h+='</div>';
+  h+='<div class="quiz-nav-hint">点击选项选中，再点「下一题」继续</div>';
+  document.getElementById("quiz-body").innerHTML=h;
+}
+function selectOpt(idx){
+  state.answers[state.q]=idx;
+  var opts=document.querySelectorAll(".quiz-opt");
+  for(var i=0;i<opts.length;i++){opts[i].classList.remove("selected");}
+  opts[idx].classList.add("selected");
+}
+function nextQ(){
+  if(state.answers[state.q]===-1)return;
+  state.score+=QUESTIONS[state.order[state.q]].v[state.answers[state.q]];
+  state.q++;
+  if(state.q<10)renderQ();else showResult();
+}
+function prevQ(){
+  if(state.q===0)return;
+  // Undo previous question's score
+  if(state.answers[state.q-1]!==-1){
+    state.score-=QUESTIONS[state.order[state.q-1]].v[state.answers[state.q-1]];
+  }
+  state.q--;
+  renderQ();
+}
+function showResult(){var pct=Math.round(state.score);var r=RESULTS[0];for(var i=0;i<RESULTS.length;i++){if(pct>=RESULTS[i].p[0]&&pct<=RESULTS[i].p[1]){r=RESULTS[i];break;}}var note=NOTES[Math.floor(Math.random()*NOTES.length)];var es=["🌸","🌱","🌅","🕯️","🌿","💬","☀️","🚣","🧱","🎯","🛡️","🗺️","🚢","🎨","💧","🏡","🐑","👑","🌟","✨"];var re=es[Math.floor(Math.random()*es.length)];var h='<div class="result-emoji">'+re+'</div>';h+='<div class="result-pct">'+pct+'%</div>';h+='<div class="result-pct-label">自爱指数</div>';h+='<div class="result-name">'+r.n+'</div>';h+='<div class="result-poem">\u201C'+r.q+'\u201D</div>';h+='<div class="result-divider"></div>';h+='<div class="result-psy"><div class="result-psy-title">🧠 心理小知识</div><div class="result-psy-text">'+r.k+'</div></div>';h+='<div class="result-note-wrap"><div class="result-note">💌 治愈一件小事<br>'+note+'</div></div>';h+='<div class="result-actions"><button class="result-btn retry" onclick="startQuiz()">再测一次 \u21BB</button><button class="result-btn poster" onclick="generatePoster()">生成结果海报 \uD83C\uDFA8</button></div>';document.getElementById("result-inner").innerHTML=h;showScreen("screen-result");window.scrollTo(0,0);}
+function shareResult(){generatePoster();}
+// ===== POSTER GENERATION =====
+function generatePoster(){
+  var pct=Math.round(state.score);var r=RESULTS[0];
+  for(var i=0;i<RESULTS.length;i++){if(pct>=RESULTS[i].p[0]&&pct<=RESULTS[i].p[1]){r=RESULTS[i];break;}}
+  var note=NOTES[Math.floor(Math.random()*NOTES.length)];
+  var es=["🌸","🌱","🌅","🕯️","🌿","💬","☀️","🚣","🧱","🎯","🛡️","🗺️","🚢","🎨","💧","🏡","🐑","👑","🌟","✨"];
+  var re=es[Math.floor(Math.random()*es.length)];
+  var canvas=document.getElementById("poster-canvas"),ctx=canvas.getContext("2d");
+  canvas.width=750;canvas.height=1100;var W=750,H=1100;
+  ctx.clearRect(0,0,W,H);
+  // Cream bg
+  ctx.fillStyle="#faf8f5";roundRect(ctx,0,0,W,H,30);ctx.fill();
+  // Top header - yellow band gradient
+  var hg=ctx.createLinearGradient(0,0,W,0);
+  hg.addColorStop(0,"#f5f0d0");hg.addColorStop(0.5,"#e8d88a");hg.addColorStop(1,"#f5f0d0");
+  ctx.save();roundRect(ctx,0,0,W,110,30);ctx.clip();
+  ctx.fillStyle=hg;ctx.fillRect(0,0,W,110);
+  ctx.restore();
+  // Title
+  ctx.fillStyle="#4a4040";ctx.font='bold 34px "PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif';ctx.textAlign="center";
+  ctx.fillText("100% 爱你老己",W/2,58);
+  ctx.font='15px "PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif';ctx.fillStyle="#7a6e6e";
+  ctx.fillText("5·25 我爱我 · 自爱指数测试",W/2,88);
+  // Big Emoji
+  ctx.font="90px sans-serif";ctx.fillText(re,W/2,210);
+  // Score
+  ctx.fillStyle="#4a4040";ctx.font='bold 80px "PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif';
+  ctx.fillText(pct+"%",W/2,300);
+  ctx.font='18px "PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif';ctx.fillStyle="#b0a4a4";
+  ctx.fillText("自爱指数",W/2,332);
+  // Personality name - gradient underline
+  var nm='「 '+r.n+' 」';
+  ctx.fillStyle="#4a4040";ctx.font='bold 26px "PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif';
+  ctx.fillText(r.e+"  "+r.n,W/2,400);
+  // Underline gradient
+  var ug=ctx.createLinearGradient(W/2-120,0,W/2+120,0);
+  ug.addColorStop(0,"#e8d88a");ug.addColorStop(0.33,"#b8d8a8");ug.addColorStop(0.66,"#a8c8d8");ug.addColorStop(1,"#e8b8c8");
+  ctx.fillStyle=ug;roundRect(ctx,W/2-100,418,200,4,2);ctx.fill();
+  // Poem quote
+  ctx.fillStyle="#7a6e6e";ctx.font='italic 16px "PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif';
+  var quoteLines=wrapText(ctx,"\u201C"+r.q+"\u201D",600);
+  var qy=460;
+  for(var qi=0;qi<quoteLines.length;qi++){ctx.fillText(quoteLines[qi],W/2,qy);qy+=28;}
+  // Sticky note (yellow)
+  var ny=qy+16;
+  ctx.fillStyle="#f5f0d0";ctx.strokeStyle="#e8d88a";ctx.lineWidth=2;
+  roundRect(ctx,W/2-220,ny,440,100,14);ctx.fill();ctx.stroke();
+  // Note fold corner
+  ctx.fillStyle="#e8d88a";ctx.beginPath();ctx.moveTo(W/2+220-30,ny);ctx.lineTo(W/2+220,ny);ctx.lineTo(W/2+220,ny+30);ctx.closePath();ctx.fill();
+  ctx.fillStyle="#4a4040";ctx.font='bold 14px "PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif';ctx.textAlign="left";
+  ctx.fillText("💌 治愈一件小事",W/2-200,ny+32);
+  ctx.fillStyle="#4a4040";ctx.font='13px "PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif';
+  var nl=wrapText(ctx,note,400);
+  for(var ni=0;ni<Math.min(nl.length,2);ni++){ctx.fillText(nl[ni],W/2-200,ny+56+ni*22);}
+  // Psychology section (blue)
+  var py=ny+132;
+  ctx.fillStyle="#d0e8f5";roundRect(ctx,W/2-220,py,440,80,14);ctx.fill();
+  ctx.fillStyle="#4a4040";ctx.font='bold 14px "PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif';ctx.textAlign="left";
+  ctx.fillText("🧠 心理小知识",W/2-200,py+28);
+  ctx.fillStyle="#5a5050";ctx.font='12px "PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif';
+  var pl=wrapText(ctx,r.k,400);
+  for(var pi=0;pi<Math.min(pl.length,2);pi++){ctx.fillText(pl[pi],W/2-200,py+50+pi*20);}
+  // Color dots row
+  var dy=py+100;
+  var dots=[{c:"#e8d88a"},{c:"#b8d8a8"},{c:"#a8c8d8"},{c:"#e8b8c8"},{c:"#e8d88a"},{c:"#b8d8a8"}];
+  for(var di=0;di<dots.length;di++){
+    ctx.fillStyle=dots[di].c;ctx.beginPath();
+    ctx.arc(W/2-100+di*40,dy,7,0,Math.PI*2);ctx.fill();
+  }
+  // Footer
+  ctx.fillStyle="#b0a4a4";ctx.font='14px "PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif';ctx.textAlign="center";
+  ctx.fillText("扫码测测你的自爱指数 →",W/2,dy+40);
+  // Bottom color bar
+  var bg=ctx.createLinearGradient(0,0,W,0);
+  bg.addColorStop(0,"#e8d88a");bg.addColorStop(0.33,"#b8d8a8");bg.addColorStop(0.66,"#a8c8d8");bg.addColorStop(1,"#e8b8c8");
+  ctx.fillStyle=bg;ctx.fillRect(0,H-8,W,8);
+  // Show modal
+  var img=document.getElementById("poster-img");img.style.display="none";
+  canvas.style.display="block";
+  document.getElementById("poster-overlay").classList.add("show");
+  document.getElementById("poster-msg").textContent="长按海报即可保存";
+}
+function savePoster(){
+  var canvas=document.getElementById("poster-canvas");
+  var link=document.createElement("a");link.download="100percent-love-yourself.png";
+  link.href=canvas.toDataURL("image/png");link.click();
+  document.getElementById("poster-msg").textContent="已保存！快去分享吧 ✨";
+}
+function sharePosterImg(){
+  var canvas=document.getElementById("poster-canvas");
+  canvas.toBlob(function(blob){
+    if(navigator.share&&navigator.canShare&&navigator.canShare({files:[new File([blob],"poster.png",{type:"image/png"})]})){
+      navigator.share({files:[new File([blob],"poster.png",{type:"image/png"})],title:"100%爱你老己",text:"来测测你的自爱指数！"}).catch(function(){});
+    }else{
+      savePoster();document.getElementById("poster-msg").textContent="请长按海报保存后分享 ✨";
+    }
+  },"image/png");
+}
+function closePoster(){document.getElementById("poster-overlay").classList.remove("show");}
+// ===== CANVAS HELPERS =====
+function roundRect(ctx,x,y,w,h,r){
+  ctx.beginPath();ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);
+  ctx.quadraticCurveTo(x+w,y,x+w,y+r);ctx.lineTo(x+w,y+h-r);
+  ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);ctx.lineTo(x+r,y+h);
+  ctx.quadraticCurveTo(x,y+h,x,y+h-r);ctx.lineTo(x,y+r);
+  ctx.quadraticCurveTo(x,y,x+r,y);ctx.closePath();
+}
+function wrapText(ctx,text,maxW){
+  var words=text.split(""),lines=[],cur="";
+  for(var i=0;i<words.length;i++){
+    var t=cur+words[i];
+    if(ctx.measureText(t).width>maxW&&cur.length>0){lines.push(cur);cur=words[i];}
+    else{cur=t;}
+  }
+  if(cur.length>0)lines.push(cur);
+  return lines;
+}
+function showScreen(id){var ss=document.querySelectorAll(".screen");for(var i=0;i<ss.length;i++){ss[i].classList.remove("active");ss[i].classList.add("hidden");}document.getElementById(id).classList.remove("hidden");document.getElementById(id).classList.add("active");}
+</script>
+</body>
+</html>
