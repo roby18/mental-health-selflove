@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>爱与被爱 — 心理健康科普海报</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #e8e4df;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 40px 20px;
+    min-height: 100vh;
+    font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  }
+
+  /* A3 at 96dpi web preview: 297mm x 420mm ≈ 1123px x 1587px */
+  /* We scale to fit screen but keep ratio */
+  .poster {
+    width: 794px;
+    height: 1123px;
+    background: #f5f0eb;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  /* ===== BACKGROUND DECORATIVE LAYERS ===== */
+  .bg-circle-1 {
+    position: absolute;
+    width: 520px; height: 520px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #d4c5b8 0%, transparent 70%);
+    top: -120px; right: -140px;
+    opacity: 0.5;
+  }
+  .bg-circle-2 {
+    position: absolute;
+    width: 380px; height: 380px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #bfc9c2 0%, transparent 70%);
+    bottom: 100px; left: -100px;
+    opacity: 0.4;
+  }
+  .bg-stripe {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 280px;
+    background: linear-gradient(180deg, transparent 0%, #e8e2da 100%);
+    opacity: 0.6;
+  }
+
+  /* ===== HEADER BAND ===== */
+  .header-band {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 12px;
+    background: linear-gradient(90deg, #a8b5a0 0%, #b5a8a0 40%, #a8a8b8 100%);
+  }
+
+  /* ===== TOP TAG ===== */
+  .top-tag {
+    position: absolute;
+    top: 32px; left: 44px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .tag-badge {
+    background: #a8b5a0;
+    color: #fff;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-weight: 500;
+  }
+  .tag-sub {
+    color: #9a8e84;
+    font-size: 11px;
+    letter-spacing: 1px;
+  }
+
+  /* ===== MAIN ILLUSTRATION AREA ===== */
+  .illustration-area {
+    position: absolute;
+    top: 70px;
+    left: 0; right: 0;
+    height: 390px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* SVG scene */
+  .main-svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* ===== TITLE SECTION ===== */
+  .title-section {
+    position: absolute;
+    top: 450px;
+    left: 0; right: 0;
+    text-align: center;
+    padding: 0 60px;
+  }
+  .title-en {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: #a8b5a0;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .title-zh {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 52px;
+    font-weight: 700;
+    color: #5a4e45;
+    line-height: 1.1;
+    margin-bottom: 6px;
+    letter-spacing: 4px;
+  }
+  .title-sub {
+    font-size: 14px;
+    color: #9a8e84;
+    letter-spacing: 2px;
+    font-weight: 300;
+  }
+
+  /* divider */
+  .divider {
+    position: absolute;
+    top: 578px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 240px;
+    justify-content: center;
+  }
+  .divider-line { flex: 1; height: 0.5px; background: #c4b8ae; }
+  .divider-dot { width: 5px; height: 5px; border-radius: 50%; background: #a8b5a0; }
+
+  /* ===== QUOTE SECTION ===== */
+  .quote-section {
+    position: absolute;
+    top: 598px;
+    left: 60px; right: 60px;
+    text-align: center;
+  }
+  .quote-mark {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 36px;
+    color: #c4b8ae;
+    line-height: 1;
+    margin-bottom: -8px;
+  }
+  .quote-text {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 17px;
+    color: #6b5f54;
+    line-height: 1.8;
+    letter-spacing: 1px;
+  }
+  .quote-author {
+    margin-top: 10px;
+    font-size: 11px;
+    color: #a8b5a0;
+    letter-spacing: 2px;
+  }
+
+  /* ===== KNOWLEDGE CARDS ===== */
+  .cards-section {
+    position: absolute;
+    top: 720px;
+    left: 40px; right: 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+  }
+  .card {
+    background: rgba(255,255,255,0.55);
+    border-radius: 16px;
+    padding: 20px 16px;
+    border: 0.5px solid rgba(168,181,160,0.4);
+    text-align: center;
+    backdrop-filter: blur(4px);
+  }
+  .card-icon {
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 10px;
+    font-size: 20px;
+  }
+  .card-icon.green { background: #e2ead9; }
+  .card-icon.pink  { background: #ead9d9; }
+  .card-icon.blue  { background: #d9e0ea; }
+  .card-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: #5a4e45;
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+  }
+  .card-body {
+    font-size: 11px;
+    color: #8a7e74;
+    line-height: 1.7;
+  }
+
+  /* ===== TIP STRIP ===== */
+  .tip-strip {
+    position: absolute;
+    top: 938px;
+    left: 40px; right: 40px;
+    background: linear-gradient(135deg, #dde5d8 0%, #d9dfe6 100%);
+    border-radius: 16px;
+    padding: 18px 28px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .tip-icon {
+    width: 36px; height: 36px;
+    background: rgba(255,255,255,0.5);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .tip-content {}
+  .tip-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: #5a4e45;
+    margin-bottom: 4px;
+    letter-spacing: 0.5px;
+  }
+  .tip-text {
+    font-size: 11px;
+    color: #7a6e64;
+    line-height: 1.7;
+  }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    position: absolute;
+    bottom: 22px;
+    left: 44px; right: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .footer-logo {
+    font-size: 10px;
+    color: #b0a498;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .footer-logo-dot {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #a8b5a0, #b5a8a0);
+  }
+  .footer-tag {
+    font-size: 10px;
+    color: #b0a498;
+    letter-spacing: 2px;
+  }
+  .footer-line {
+    position: absolute;
+    bottom: 52px;
+    left: 44px; right: 44px;
+    height: 0.5px;
+    background: #c4b8ae;
+    opacity: 0.5;
+  }
+
+  /* ===== 525 BADGE ===== */
+  .badge-525 {
+    position: absolute;
+    top: 32px; right: 44px;
+    width: 68px; height: 68px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #a8b5a0 0%, #b5a8c0 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    box-shadow: 0 4px 16px rgba(168,181,160,0.35);
+  }
+  .badge-num {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 1px;
+  }
+  .badge-text {
+    font-size: 8.5px;
+    letter-spacing: 1px;
+    opacity: 0.9;
+    margin-top: 2px;
+  }
+
+  /* ===== SIDE DECORATION ===== */
+  .side-deco {
+    position: absolute;
+    left: 0; top: 230px;
+    width: 4px; height: 120px;
+    background: linear-gradient(180deg, transparent, #a8b5a0, transparent);
+    border-radius: 2px;
+  }
+</style>
+</head>
+<body>
+<div class="poster">
+
+  <!-- Background decorations -->
+  <div class="bg-circle-1"></div>
+  <div class="bg-circle-2"></div>
+  <div class="bg-stripe"></div>
+
+  <!-- Top color band -->
+  <div class="header-band"></div>
+
+  <!-- Side decoration -->
+  <div class="side-deco"></div>
+
+  <!-- Top tag -->
+  <div class="top-tag">
+    <span class="tag-badge">5 · 25 心理健康月</span>
+    <span class="tag-sub">MENTAL HEALTH DAY</span>
+  </div>
+
+  <!-- 525 Badge -->
+  <div class="badge-525">
+    <span class="badge-num">5·25</span>
+    <span class="badge-text">心理健康</span>
+  </div>
+
+  <!-- Main illustration -->
+  <div class="illustration-area">
+    <svg class="main-svg" viewBox="0 0 794 390" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="glow1" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#d4c5b8" stop-opacity="0.6"/>
+          <stop offset="100%" stop-color="#d4c5b8" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="glow2" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#bfc9c2" stop-opacity="0.5"/>
+          <stop offset="100%" stop-color="#bfc9c2" stop-opacity="0"/>
+        </radialGradient>
+        <clipPath id="circle-clip">
+          <circle cx="397" cy="195" r="155"/>
+        </clipPath>
+      </defs>
+
+      <!-- Soft background glows -->
+      <ellipse cx="300" cy="200" rx="200" ry="180" fill="url(#glow1)"/>
+      <ellipse cx="500" cy="200" rx="180" ry="160" fill="url(#glow2)"/>
+
+      <!-- Main circle bg -->
+      <circle cx="397" cy="195" r="158" fill="#ede7e0" opacity="0.7"/>
+      <circle cx="397" cy="195" r="155" fill="none" stroke="#c4b8ae" stroke-width="0.5"/>
+
+      <!-- Decorative rings -->
+      <circle cx="397" cy="195" r="175" fill="none" stroke="#c4b8ae" stroke-width="0.3" opacity="0.5"/>
+      <circle cx="397" cy="195" r="195" fill="none" stroke="#c4b8ae" stroke-width="0.2" opacity="0.3"/>
+
+      <!-- ====== CENTRAL FIGURES ====== -->
+
+      <!-- Figure 1: Adult/Parent (left, slightly back) -->
+      <!-- Body -->
+      <ellipse cx="350" cy="270" rx="32" ry="42" fill="#c5bdb8"/>
+      <!-- Head -->
+      <circle cx="350" cy="215" r="28" fill="#d4c0ae"/>
+      <!-- Hair -->
+      <ellipse cx="350" cy="198" rx="28" ry="14" fill="#8a7060"/>
+      <!-- Face details -->
+      <ellipse cx="344" cy="216" rx="3.5" ry="4" fill="#6b5f54" opacity="0.7"/>
+      <ellipse cx="356" cy="216" rx="3.5" ry="4" fill="#6b5f54" opacity="0.7"/>
+      <!-- Smile -->
+      <path d="M344 225 Q350 231 356 225" fill="none" stroke="#9a7060" stroke-width="1.5" stroke-linecap="round"/>
+      <!-- Blush -->
+      <ellipse cx="340" cy="222" rx="5" ry="3" fill="#d4a0a0" opacity="0.4"/>
+      <ellipse cx="360" cy="222" rx="5" ry="3" fill="#d4a0a0" opacity="0.4"/>
+      <!-- Arms reaching -->
+      <path d="M320 250 Q295 235 275 240" stroke="#c5bdb8" stroke-width="18" stroke-linecap="round" fill="none"/>
+      <path d="M380 250 Q405 240 415 230" stroke="#c5bdb8" stroke-width="18" stroke-linecap="round" fill="none"/>
+
+      <!-- Figure 2: Child (right, front) -->
+      <!-- Body -->
+      <ellipse cx="440" cy="275" rx="26" ry="38" fill="#b8c5be"/>
+      <!-- Dress/clothes detail -->
+      <ellipse cx="440" cy="285" rx="28" ry="30" fill="#a8b5a8" opacity="0.6"/>
+      <!-- Head -->
+      <circle cx="440" cy="225" r="24" fill="#d4c0ae"/>
+      <!-- Hair -->
+      <ellipse cx="440" cy="210" rx="24" ry="12" fill="#5a4030"/>
+      <!-- Pigtails -->
+      <ellipse cx="420" cy="213" rx="8" ry="5" fill="#5a4030" transform="rotate(-20,420,213)"/>
+      <ellipse cx="460" cy="213" rx="8" ry="5" fill="#5a4030" transform="rotate(20,460,213)"/>
+      <!-- Face -->
+      <ellipse cx="434" cy="226" rx="3" ry="3.5" fill="#6b5f54" opacity="0.7"/>
+      <ellipse cx="446" cy="226" rx="3" ry="3.5" fill="#6b5f54" opacity="0.7"/>
+      <!-- Happy smile -->
+      <path d="M433 234 Q440 240 447 234" fill="none" stroke="#9a7060" stroke-width="1.5" stroke-linecap="round"/>
+      <!-- Blush -->
+      <ellipse cx="430" cy="231" rx="4.5" ry="2.5" fill="#d4a0a0" opacity="0.45"/>
+      <ellipse cx="450" cy="231" rx="4.5" ry="2.5" fill="#d4a0a0" opacity="0.45"/>
+      <!-- Arms up reaching parent -->
+      <path d="M416 255 Q400 245 390 245" stroke="#b8c5be" stroke-width="15" stroke-linecap="round" fill="none"/>
+      <path d="M464 255 Q475 248 480 252" stroke="#b8c5be" stroke-width="15" stroke-linecap="round" fill="none"/>
+
+      <!-- Connecting hearts -->
+      <g opacity="0.7">
+        <!-- Big heart between them -->
+        <path d="M395 248 C395 242 387 238 387 245 C387 252 395 256 395 256 C395 256 403 252 403 245 C403 238 395 242 395 248Z" fill="#d4a0a0" opacity="0.65"/>
+      </g>
+
+      <!-- Floating small hearts -->
+      <g opacity="0.5">
+        <path d="M300 170 C300 166 294 163 294 168 C294 173 300 176 300 176 C300 176 306 173 306 168 C306 163 300 166 300 170Z" fill="#c4aeae"/>
+        <path d="M490 165 C490 162 485 159 485 163 C485 167 490 170 490 170 C490 170 495 167 495 163 C495 159 490 162 490 165Z" fill="#aec4b4"/>
+        <path d="M260 210 C260 207 256 205 256 208 C256 211 260 213 260 213 C260 213 264 211 264 208 C264 205 260 207 260 210Z" fill="#c4aeae"/>
+        <path d="M535 190 C535 187 531 185 531 188 C531 191 535 193 535 193 C535 193 539 191 539 188 C539 185 535 187 535 190Z" fill="#aec4b4"/>
+        <path d="M320 155 C320 153 317 151 317 154 C317 157 320 158 320 158 C320 158 323 157 323 154 C323 151 320 153 320 155Z" fill="#c4aeae"/>
+        <path d="M475 148 C475 146 472 144 472 147 C472 150 475 151 475 151 C475 151 478 150 478 147 C478 144 475 146 475 148Z" fill="#aec4b4"/>
+      </g>
+
+      <!-- Sparkles/stars -->
+      <g fill="#c4b8ae" opacity="0.6">
+        <polygon points="250,160 252,155 254,160 259,160 255,163 257,168 252,165 247,168 249,163 245,160" transform="scale(0.6) translate(167,107)"/>
+        <polygon points="540,145 542,140 544,145 549,145 545,148 547,153 542,150 537,153 539,148 535,145" transform="scale(0.5) translate(540,95)"/>
+        <polygon points="270,310 272,305 274,310 279,310 275,313 277,318 272,315 267,318 269,313 265,310" transform="scale(0.5) translate(270,310)"/>
+      </g>
+
+      <!-- Leaf/nature elements -->
+      <g opacity="0.35">
+        <ellipse cx="240" cy="300" rx="18" ry="10" fill="#a8b5a0" transform="rotate(-30,240,300)"/>
+        <ellipse cx="555" cy="290" rx="16" ry="9" fill="#a8b5a0" transform="rotate(25,555,290)"/>
+        <ellipse cx="230" cy="285" rx="12" ry="7" fill="#b5a8a0" transform="rotate(-50,230,285)"/>
+        <ellipse cx="565" cy="308" rx="11" ry="6" fill="#b5a8a0" transform="rotate(45,565,308)"/>
+        <ellipse cx="255" cy="315" rx="10" ry="6" fill="#a8b5a0" transform="rotate(-15,255,315)"/>
+      </g>
+
+    </svg>
+  </div>
+
+  <!-- Title section -->
+  <div class="title-section">
+    <div class="title-en">LOVE &amp; BE LOVED</div>
+    <div class="title-zh">爱与被爱</div>
+    <div class="title-sub">人际连结 · 心灵成长 · 滋养内心</div>
+  </div>
+
+  <!-- Divider -->
+  <div class="divider">
+    <div class="divider-line"></div>
+    <div class="divider-dot"></div>
+    <div class="divider-line"></div>
+  </div>
+
+  <!-- Quote -->
+  <div class="quote-section">
+    <div class="quote-mark">"</div>
+    <div class="quote-text">
+      爱不只是一种感觉，<br>更是一种守护彼此内心的力量。
+    </div>
+    <div class="quote-author">— 心理学家 约翰·鲍尔比（依恋理论）</div>
+  </div>
+
+  <!-- Knowledge cards -->
+  <div class="cards-section">
+    <div class="card">
+      <div class="card-icon green">🌱</div>
+      <div class="card-title">爱的连结</div>
+      <div class="card-body">安全的人际依恋是心理健康的根基。当我们感受到被爱，大脑会分泌让人平静的催产素。</div>
+    </div>
+    <div class="card">
+      <div class="card-icon pink">💬</div>
+      <div class="card-title">表达你的爱</div>
+      <div class="card-body">主动说出"我爱你"、"谢谢你"、"我在"——这些话语能有效缓解对方的焦虑与孤独感。</div>
+    </div>
+    <div class="card">
+      <div class="card-icon blue">🤝</div>
+      <div class="card-title">接受被爱</div>
+      <div class="card-body">学会接受他人的关心同样重要。允许自己被帮助，是自我认可与内心成熟的体现。</div>
+    </div>
+  </div>
+
+  <!-- Tip strip -->
+  <div class="tip-strip">
+    <div class="tip-icon">✨</div>
+    <div class="tip-content">
+      <div class="tip-title">今天，你可以这样做</div>
+      <div class="tip-text">
+        给家人或好友发一条温暖的消息 &nbsp;·&nbsp; 认真倾听一次对话，不看手机 &nbsp;·&nbsp; 对帮助过你的人说一声"谢谢"
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer line -->
+  <div class="footer-line"></div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-logo">
+      <div class="footer-logo-dot"></div>
+      广州市番禺区 · 心理健康科普
+    </div>
+    <div class="footer-tag">5·25 MENTAL HEALTH MONTH · 2026</div>
+  </div>
+
+</div>
+</body>
+</html>
