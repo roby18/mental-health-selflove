@@ -13,3 +13,5 @@ _全局偏好见 `~/.workbuddy/USER.md`_
 - **视觉风格**：莫兰迪色系（黄绿蓝粉），Claymorphism
 - **输出文件**：`poster.html`（海报）、`quiz.html`（自爱测试）
 - **GitHub**：`https://github.com/roby18/mental-health-selflove`
+- **EdgeOne Pages**：`https://mental-health-selflove-prcpgq59.edgeone.cool?eo_token=de42a297a7fec88d9f8fc70c9cec6c12&eo_time=1779629228`
+  - ⚠️ URL 必须带 `?eo_token=...&eo_time=...` 才能访问，裸 URL 返回 401
