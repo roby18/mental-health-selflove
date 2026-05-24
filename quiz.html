@@ -6,7 +6,7 @@
 <title>100%爱你老己 自爱指数测试</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Varela+Round&family=Nunito+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Varela+Round&family=Nunito+Sans:wght@300;400;500;600;700;800&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
 <style>
 /* ===== CLAYMORPHISM DESIGN SYSTEM powered by UI/UX Pro Max ===== */
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -126,7 +126,10 @@ html, body { height: 100%; font-family: "Nunito Sans", "PingFang SC", "Microsoft
 .poster-btn-share { background: var(--c-blue-light); border-color: var(--c-blue); color: var(--c-text); }
 .poster-btn-close { background: var(--c-cream); border-color: var(--c-cream2); color: var(--c-text2); }
 .poster-saving { font-size: 13px; color: var(--c-text3); margin-top: 10px; font-weight: 500; }
+/* Signature watermark */
+.sig-watermark { position: fixed; bottom: 12px; right: 20px; font-family: "Caveat","Dancing Script","Brush Script MT",cursive; font-size: 22px; font-weight: 500; color: rgba(160,150,150,0.28); pointer-events: none; z-index: 999; font-style: italic; letter-spacing: 0.5px; }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
 </head>
 <body>
 
@@ -273,10 +276,8 @@ function renderQ(){
   h+='</div>';
   h+='<div class="quiz-nav">';
   h+='<button class="quiz-nav-btn" onclick="prevQ()" '+(state.q===0?'disabled':'')+'>← 上一题</button>';
-  if(state.q<9) h+='<button class="quiz-nav-btn primary" onclick="nextQ()">下一题 →</button>';
-  else h+='<button class="quiz-nav-btn primary" onclick="nextQ()">查看结果 ✨</button>';
   h+='</div>';
-  h+='<div class="quiz-nav-hint">点击选项选中，再点「下一题」继续</div>';
+  h+='<div class="quiz-nav-hint">点击选项自动下一题，可随时返回修改</div>';
   document.getElementById("quiz-body").innerHTML=h;
 }
 function selectOpt(idx){
@@ -284,6 +285,11 @@ function selectOpt(idx){
   var opts=document.querySelectorAll(".quiz-opt");
   for(var i=0;i<opts.length;i++){opts[i].classList.remove("selected");}
   opts[idx].classList.add("selected");
+  setTimeout(function(){
+    state.score+=QUESTIONS[state.order[state.q]].v[state.answers[state.q]];
+    state.q++;
+    if(state.q<10)renderQ();else showResult();
+  },250);
 }
 function nextQ(){
   if(state.answers[state.q]===-1)return;
@@ -371,9 +377,23 @@ function generatePoster(){
     ctx.fillStyle=dots[di].c;ctx.beginPath();
     ctx.arc(W/2-100+di*40,dy,7,0,Math.PI*2);ctx.fill();
   }
-  // Footer
-  ctx.fillStyle="#b0a4a4";ctx.font='14px "PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif';ctx.textAlign="center";
-  ctx.fillText("扫码测测你的自爱指数 →",W/2,dy+40);
+  // QR Code
+  var deployURL="https://mental-health-selflove-prcpgq59.edgeone.cool?eo_token=de42a297a7fec88d9f8fc70c9cec6c12&eo_time=1779629228";
+  var qrDiv=document.getElementById("qr-gen");qrDiv.innerHTML="";
+  new QRCode(qrDiv,{text:deployURL,width:130,height:130,colorDark:"#4a4040",colorLight:"#faf8f5",correctLevel:QRCode.CorrectLevel.M});
+  var qrCanvas=qrDiv.querySelector("canvas");
+  var qrY=dy+22, qrW=130;
+  if(qrCanvas){
+    // White background for QR
+    ctx.fillStyle="#faf8f5";roundRect(ctx,W/2-qrW/2-8,qrY-8,qrW+16,qrW+16,12);ctx.fill();
+    ctx.drawImage(qrCanvas,W/2-qrW/2,qrY,qrW,qrW);
+  }
+  // QR instruction text
+  ctx.fillStyle="#7a6e6e";ctx.font='14px "PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif';ctx.textAlign="center";
+  ctx.fillText("📱 扫码测测你的自爱指数",W/2,qrY+qrW+20);
+  // Signature on poster
+  ctx.fillStyle="rgba(160,150,150,0.5)";ctx.font='italic 500 16px "Caveat","Dancing Script","Brush Script MT",cursive';
+  ctx.fillText("writeby: Siqing",W/2,qrY+qrW+46);
   // Bottom color bar
   var bg=ctx.createLinearGradient(0,0,W,0);
   bg.addColorStop(0,"#e8d88a");bg.addColorStop(0.33,"#b8d8a8");bg.addColorStop(0.66,"#a8c8d8");bg.addColorStop(1,"#e8b8c8");
@@ -421,5 +441,7 @@ function wrapText(ctx,text,maxW){
 }
 function showScreen(id){var ss=document.querySelectorAll(".screen");for(var i=0;i<ss.length;i++){ss[i].classList.remove("active");ss[i].classList.add("hidden");}document.getElementById(id).classList.remove("hidden");document.getElementById(id).classList.add("active");}
 </script>
+<div class="sig-watermark">writeby: Siqing</div>
+<div id="qr-gen" style="display:none"></div>
 </body>
 </html>
