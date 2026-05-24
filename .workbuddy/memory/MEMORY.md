@@ -1,19 +1,15 @@
 # MEMORY.md — 长期记忆
 
 ## 项目约定
-
-### 网页部署流程（长期约定）
-- **GitHub**：所有开发的网页/前端项目，完成之后自动推送到 GitHub
-  - 账号：roby18
-  - Token 存储在 `~/.workbuddy/.env`（全局，跨工作空间共享）
-  - **仓库命名**：必须根据项目内容取有意义的名字（全小写英文+连字符），禁止用工作空间目录名做仓库名。例如 `mental-health-selflove`、`mahjong-rhythm-game`
-- **EdgeOne Pages**：需要部署上线时，使用 EdgeOne Pages 部署
-  - API Token 存储在 `~/.workbuddy/.env`
-- **凭证读取**：所有凭证从 `~/.workbuddy/.env` 读取，不硬编码
+_全局约定（部署流程等）见 `~/.workbuddy/USER.md`_
 
 ## 用户偏好
+_全局偏好见 `~/.workbuddy/USER.md`_
 
-- 简洁的视觉总结，习惯用带 emoji 的表格呈现信息
-- 需求表达结构化，常用编号列表明确要求
-- 迭代节奏快，同一消息中会提出多个修改需求
-- 对输出质量和响应速度要求较高
+## 当前项目：心理健康日活动
+
+- **内容**：5·25 心理健康宣传月 AI 海报参赛 + 自爱测试网页
+- **受众**：初中生 / 家长
+- **视觉风格**：莫兰迪色系（黄绿蓝粉），Claymorphism
+- **输出文件**：`poster.html`（海报）、`quiz.html`（自爱测试）
+- **GitHub**：`https://github.com/roby18/mental-health-selflove`
