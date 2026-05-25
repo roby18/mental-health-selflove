@@ -378,7 +378,7 @@ function generatePoster(){
     ctx.arc(W/2-100+di*40,dy,7,0,Math.PI*2);ctx.fill();
   }
   // QR Code
-  var deployURL="https://mental-health-selflove-prcpgq59.edgeone.cool?eo_token=de42a297a7fec88d9f8fc70c9cec6c12&eo_time=1779629228";
+  var deployURL=window.location.href;
   var qrDiv=document.getElementById("qr-gen");qrDiv.innerHTML="";
   new QRCode(qrDiv,{text:deployURL,width:130,height:130,colorDark:"#4a4040",colorLight:"#faf8f5",correctLevel:QRCode.CorrectLevel.M});
   var qrCanvas=qrDiv.querySelector("canvas");

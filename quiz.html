@@ -127,7 +127,7 @@ html, body { height: 100%; font-family: "Nunito Sans", "PingFang SC", "Microsoft
 .poster-btn-close { background: var(--c-cream); border-color: var(--c-cream2); color: var(--c-text2); }
 .poster-saving { font-size: 13px; color: var(--c-text3); margin-top: 10px; font-weight: 500; }
 /* Signature watermark */
-.sig-watermark { position: fixed; bottom: 12px; right: 20px; font-family: "Caveat","Dancing Script","Brush Script MT",cursive; font-size: 22px; font-weight: 500; color: rgba(160,150,150,0.28); pointer-events: none; z-index: 999; font-style: italic; letter-spacing: 0.5px; }
+.sig-watermark { position: fixed; bottom: 12px; right: 20px; font-family: "Caveat","Dancing Script","Brush Script MT",cursive; font-size: 22px; font-weight: 500; color: rgba(140,130,130,0.45); pointer-events: none; z-index: 999; font-style: italic; letter-spacing: 0.5px; }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
 </head>
@@ -378,7 +378,7 @@ function generatePoster(){
     ctx.arc(W/2-100+di*40,dy,7,0,Math.PI*2);ctx.fill();
   }
   // QR Code
-  var deployURL="https://mental-health-selflove-prcpgq59.edgeone.cool?eo_token=de42a297a7fec88d9f8fc70c9cec6c12&eo_time=1779629228";
+  var deployURL=window.location.href;
   var qrDiv=document.getElementById("qr-gen");qrDiv.innerHTML="";
   new QRCode(qrDiv,{text:deployURL,width:130,height:130,colorDark:"#4a4040",colorLight:"#faf8f5",correctLevel:QRCode.CorrectLevel.M});
   var qrCanvas=qrDiv.querySelector("canvas");
@@ -392,7 +392,7 @@ function generatePoster(){
   ctx.fillStyle="#7a6e6e";ctx.font='14px "PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif';ctx.textAlign="center";
   ctx.fillText("📱 扫码测测你的自爱指数",W/2,qrY+qrW+20);
   // Signature on poster
-  ctx.fillStyle="rgba(160,150,150,0.5)";ctx.font='italic 500 16px "Caveat","Dancing Script","Brush Script MT",cursive';
+  ctx.fillStyle="rgba(140,130,130,0.65)";ctx.font='italic 500 16px "Caveat","Dancing Script","Brush Script MT",cursive';
   ctx.fillText("writeby: Siqing",W/2,qrY+qrW+46);
   // Bottom color bar
   var bg=ctx.createLinearGradient(0,0,W,0);
